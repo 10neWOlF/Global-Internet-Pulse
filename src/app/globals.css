@@ -109,6 +109,29 @@ body {
   overflow: auto;
 }
 
+/* Custom scrollbar for blue modal */
+.modal-card-blue::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-card-blue::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 2rem;
+}
+.modal-card-blue::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 2rem;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.modal-card-blue::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* For Firefox */
+.modal-card-blue {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 transparent;
+}
+
 .modal-card-green {
   background: linear-gradient(135deg, rgba(240, 253, 244, 0.98) 0%, rgba(220, 252, 231, 0.98) 100%);
   backdrop-filter: blur(20px);
@@ -137,12 +160,61 @@ body {
 }
 
 .modal-card-red {
-  background: linear-gradient(135deg, rgba(254, 242, 242, 0.98) 0%, rgba(254, 226, 226, 0.98) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 242, 242, 0.95) 100%);
+  border: 2px solid #ef4444;
+  box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.25), 0 0 0 1px rgba(239, 68, 68, 0.05);
   backdrop-filter: blur(20px);
-  border: 2px solid rgba(239, 68, 68, 0.3);
   border-radius: 2rem;
-  box-shadow: 0 20px 60px rgba(239, 68, 68, 0.2), 0 8px 32px rgba(0, 0, 0, 0.1);
   overflow: auto;
+  padding-right: 12px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Enhanced modal scrollbar with shorter track */
+.modal-card-red::-webkit-scrollbar {
+  width: 4px; /* Even thinner */
+}
+
+.modal-card-red::-webkit-scrollbar-track {
+  background: transparent;
+  /* Much larger margins - scrollbar will be much shorter */
+  margin: 40px 0;
+  border-radius: 2px;
+}
+
+.modal-card-red::-webkit-scrollbar-thumb {
+  background-color: rgba(239, 68, 68, 0.6);
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* Additional margin to make thumb much shorter */
+  margin: 16px 0;
+}
+
+/* Apply to all modal types */
+.modal-card-blue::-webkit-scrollbar,
+.modal-card-green::-webkit-scrollbar,
+.modal-card-purple::-webkit-scrollbar,
+.modal-card-orange::-webkit-scrollbar {
+  width: 4px; /* Thinner scrollbar */
+}
+
+.modal-card-blue::-webkit-scrollbar-track,
+.modal-card-green::-webkit-scrollbar-track,
+.modal-card-purple::-webkit-scrollbar-track,
+.modal-card-orange::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 40px 0; /* Much larger margins - 80px shorter total */
+  border-radius: 2px;
+}
+
+.modal-card-blue::-webkit-scrollbar-thumb,
+.modal-card-green::-webkit-scrollbar-thumb,
+.modal-card-purple::-webkit-scrollbar-thumb,
+.modal-card-orange::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 16px 0; /* Additional 32px shorter for thumb */
 }
 
 /* Custom embedded scrollbars for modals */
@@ -203,4 +275,24 @@ body {
 .modal-card-orange::-webkit-scrollbar-thumb:hover,
 .modal-card-red::-webkit-scrollbar-thumb:hover {
   opacity: 0.8;
+}
+
+/* Hide scrollbars completely while keeping scroll functionality */
+.modal-card-red,
+.modal-card-blue,
+.modal-card-green,
+.modal-card-purple,
+.modal-card-orange {
+  /* Hide scrollbar for webkit browsers (Chrome, Safari, Edge) */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.modal-card-red::-webkit-scrollbar,
+.modal-card-blue::-webkit-scrollbar,
+.modal-card-green::-webkit-scrollbar,
+.modal-card-purple::-webkit-scrollbar,
+.modal-card-orange::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for webkit browsers */
 }

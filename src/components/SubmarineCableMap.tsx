@@ -150,111 +150,116 @@ export default function SubmarineCableMap() {
   }
 
   return (
-    <div className="glass-card rounded-xl p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-            <Anchor className="w-5 h-5 text-blue-600" />
-            Live Submarine Cable
-          </h3>
-          <p className="text-sm text-gray-600 mt-1">
-            Global undersea internet infrastructure monitoring
-          </p>
+    <>
+      <div className="glass-card rounded-xl p-6">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+              <Anchor className="w-5 h-5 text-blue-600" />
+              Live Submarine Cable
+            </h3>
+            <p className="text-sm text-gray-600 mt-1">
+              Global undersea internet infrastructure monitoring
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+            <span className="text-sm text-blue-600 font-medium">MONITORING</span>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-          <span className="text-sm text-blue-600 font-medium">MONITORING</span>
-        </div>
-      </div>
 
-      {/* Status Filter */}
-      <div className="mb-4">
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="text-sm border border-gray-300 rounded px-3 py-1 bg-white"
-        >
-          <option value="all">All Cables ({cables.length})</option>
-          <option value="operational">Operational ({statusCounts.operational})</option>
-          <option value="maintenance">Maintenance ({statusCounts.maintenance})</option>
-          <option value="disrupted">Disrupted ({statusCounts.disrupted})</option>
-          <option value="planned">Planned ({statusCounts.planned})</option>
-        </select>
-      </div>
-
-      {/* Cable List */}
-      <div className="space-y-3 max-h-80 overflow-y-auto">
-        {filteredCables.map((cable) => (
-          <div
-            key={cable.id}
-            className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-            onClick={() => setSelectedCable(cable)}
+        {/* Status Filter */}
+        <div className="mb-4">
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="text-sm border border-gray-300 rounded px-3 py-1 bg-white"
           >
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  {getStatusIcon(cable.status)}
-                  <h4 className="font-semibold text-gray-900">{cable.name}</h4>
-                  <span className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(cable.status)}`}>
-                    {cable.status.toUpperCase()}
-                  </span>
+            <option value="all">All Cables ({cables.length})</option>
+            <option value="operational">Operational ({statusCounts.operational})</option>
+            <option value="maintenance">Maintenance ({statusCounts.maintenance})</option>
+            <option value="disrupted">Disrupted ({statusCounts.disrupted})</option>
+            <option value="planned">Planned ({statusCounts.planned})</option>
+          </select>
+        </div>
+
+        {/* Cable List */}
+        <div className="space-y-3 max-h-80 overflow-y-auto">
+          {filteredCables.map((cable) => (
+            <div
+              key={cable.id}
+              className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+              onClick={() => setSelectedCable(cable)}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    {getStatusIcon(cable.status)}
+                    <h4 className="font-semibold text-gray-900">{cable.name}</h4>
+                    <span className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(cable.status)}`}>
+                      {cable.status.toUpperCase()}
+                    </span>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-2">
+                    <div>
+                      <span className="font-medium">Length:</span> {cable.length.toLocaleString()} km
+                    </div>
+                    <div>
+                      <span className="font-medium">Capacity:</span> {cable.capacity}
+                    </div>
+                  </div>
+                  
+                  <div className="text-sm text-gray-600 mb-2">
+                    <span className="font-medium">Landings:</span> {cable.landings.join(' → ')}
+                  </div>
+                  
+                  {cable.incidents && (
+                    <div className="text-sm text-orange-700 bg-orange-50 px-2 py-1 rounded">
+                      ⚠️ {cable.incidents}
+                    </div>
+                  )}
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-2">
-                  <div>
-                    <span className="font-medium">Length:</span> {cable.length.toLocaleString()} km
-                  </div>
-                  <div>
-                    <span className="font-medium">Capacity:</span> {cable.capacity}
-                  </div>
+                <div className="text-xs text-gray-500 text-right">
+                  Updated {cable.lastUpdate.toLocaleTimeString()}
                 </div>
-                
-                <div className="text-sm text-gray-600 mb-2">
-                  <span className="font-medium">Landings:</span> {cable.landings.join(' → ')}
-                </div>
-                
-                {cable.incidents && (
-                  <div className="text-sm text-orange-700 bg-orange-50 px-2 py-1 rounded">
-                    ⚠️ {cable.incidents}
-                  </div>
-                )}
-              </div>
-              
-              <div className="text-xs text-gray-500 text-right">
-                Updated {cable.lastUpdate.toLocaleTimeString()}
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Status Summary */}
-      <div className="mt-4 pt-4 border-t border-gray-200">
-        <h4 className="text-sm font-semibold text-gray-600 mb-3">Global Cable Status</h4>
-        <div className="grid grid-cols-2 gap-3 text-sm">
-          <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-green-600" />
-            <span>Operational: {statusCounts.operational}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-amber-600" />
-            <span>Maintenance: {statusCounts.maintenance}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4 text-red-600" />
-            <span>Disrupted: {statusCounts.disrupted}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-blue-600" />
-            <span>Planned: {statusCounts.planned}</span>
+        {/* Status Summary */}
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <h4 className="text-sm font-semibold text-gray-600 mb-3">Global Cable Status</h4>
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-green-600" />
+              <span>Operational: {statusCounts.operational}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-amber-600" />
+              <span>Maintenance: {statusCounts.maintenance}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-red-600" />
+              <span>Disrupted: {statusCounts.disrupted}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-blue-600" />
+              <span>Planned: {statusCounts.planned}</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Cable Detail Modal */}
+      {/* Modal rendered outside the main container */}
       {selectedCable && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="modal-card-blue shadow-2xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div
+            className="modal-card-blue max-w-xl w-full m-4 overflow-auto"
+            style={{ maxHeight: '90vh', paddingRight: '12px', boxSizing: 'border-box' }}
+          >
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -338,6 +343,6 @@ export default function SubmarineCableMap() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
