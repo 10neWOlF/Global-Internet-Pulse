@@ -162,11 +162,20 @@ const TechnologyAdoptionTracker: React.FC = () => {
   }, []);
 
   const getSelectedTechData = () => {
-    const techKey = selectedTech.toLowerCase().replace(/[^a-z]/g, '') as keyof Omit<CountryTechData, 'country' | 'flag'>;
+    // Map selected technology to the corresponding property
+    const techMapping: { [key: string]: keyof Omit<CountryTechData, 'country' | 'flag'> } = {
+      '5G': 'fiveG',
+      'Fiber Optic': 'fiber',
+      'IPv6': 'ipv6',
+      'Satellite': 'satellite'
+    };
+    
+    const techKey = techMapping[selectedTech];
+    
     return countryData.map(country => ({
       country: country.country,
       flag: country.flag,
-      adoption: country[techKey as keyof typeof country] as number
+      adoption: techKey ? country[techKey] as number : 0
     })).sort((a, b) => b.adoption - a.adoption);
   };
 
