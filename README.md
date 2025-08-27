@@ -6,7 +6,7 @@ A real-time internet traffic monitoring dashboard that displays global internet 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8?style=for-the-badge&logo=tailwindcss)
 
-##  Features
+##  Features:
 
 - **Real-time Dashboard**: Live monitoring of global internet status
 - **Interactive World Map**: Visual representation of internet traffic and outages by country
