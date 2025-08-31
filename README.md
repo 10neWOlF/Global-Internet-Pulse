@@ -8,7 +8,7 @@ A real-time internet traffic monitoring dashboard that displays global internet 
 
 ##  Features:
 
-- **Real-time Dashboard**: Live monitoring of global internet status
+- **Real-time Dashboard**: Live monitoring of global internet status.
 - **Interactive World Map**: Visual representation of internet traffic and outages by country
 - **Live Feed**: Real-time stream of network events, outages, and censorship alerts
 - **Historical Trends**: Analysis of global internet penetration over time
