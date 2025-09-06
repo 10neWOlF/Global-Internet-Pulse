@@ -19,7 +19,7 @@ A real-time internet traffic monitoring dashboard that displays global internet 
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile
 - **Free Deployment**: Ready for Vercel free tier deployment
 
-##  Quick Start
+##  Quick Start:
 
 ### Prerequisites
 
